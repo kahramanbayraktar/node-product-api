@@ -1,9 +1,10 @@
 const express = require("express");
 const mongoose = require("mongoose");
-const dotenv = require("dotenv");
+// const dotenv = require("dotenv");
+require("dotenv").config({ path: "./backend/.env" });
 const productRoutes = require("./routes/productRoutes");
 
-dotenv.config();
+// dotenv.config();
 
 const app = express();
 app.use(express.json());
@@ -11,7 +12,7 @@ app.use(express.json());
 mongoose
   .connect(process.env.MONGO_URI)
   .then(() => console.log("MongoDB connected"))
-  .catch((err) => console.error("MongoDB connection error:", error));
+  .catch((err) => console.error("MongoDB connection error:", err));
 mongoose.set("debug", true);
 
 app.use("/api/products", productRoutes);
